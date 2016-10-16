@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fulfil Project</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Angular Material Library -->
+     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+  </head>
+  <body>
+   <nav class="navbar navbar-inverse" >
+      <div class="container-fluid" style="background-color:rgb(40, 101, 173)" >
+        <div class="navbar-header" >
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" >Fulfil.io</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Home</a></li>
+            <li class="newactive"><a href="#">Employee</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="newactive"><a href="#" style="color:white;">Request Demo</a></li>
+            <li><a href="#" style="color:white;"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="lv-bg">
+      <h3 class="site-title">Address Book </h3>
+      <p> Displaying a list of people and their age and whether they are a employee or not </p>
+    </header>
+    <div class="container" ng-cloak="" class="inputdemoErrors" ng-app="MyApp">
+      <div class="row" ng-controller="mycontroller">
+          <md-content layout-padding="">
+            <div class="col-sm-6">
+              <div class="col-sm-12">
+                Filter1:
+              </div>
+              <div class="col-sm-12">
+                <md-input-container flex="50">
+                  <label>Name</label>
+                  <input name="Name" ng-model="name">
+                </md-input-container>
+                <md-input-container flex="50">
+                  <label>Age</label>
+                  <input name="Age" ng-model="age">
+                </md-input-container>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="col-sm-12">
+                Filter2:
+              </div>
+              <div class="col-sm-12">
+                <md-input-container flex="50">
+                  <label>Name</label>
+                  <input name="Age" ng-model="name1">
+                </md-input-container>
+                <md-input-container flex="50">
+                  <label>Age</label>
+                  <input name="Age" ng-model="age1">
+                </md-input-container>
+              </div>
+            </div>
+            <md-content/>
+            <div class="col-sm-12">
+              <table id="design">
+                <thead>
+                  <tr>
+                    <th ng-click="changeorder('name')">Name</th>
+                    <th ng-click="changeorder('age')">Age</th>
+                    <th ng-click="changeorder('nickName')">Nick Name</th>
+                    <th>Employee</th>
+                  </tr>
+                <tbody>
+                  <tr ng-repeat="person in persons | myFilter:name:age:name1:age1 | orderBy:myorder:dir | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td>
+                      {{person.name}}
+                    </td>
+                    <td>
+                      {{person.age}}
+                    </td>
+                    <td>
+                      {{person.nickName}}
+                    </td>
+                    <td>
+                       <input type="checkbox" ng-checked={{person.employee}}></input>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="col-sm-12" style="text-align:center">
+                <!-- <button ng-disabled="currentPage == 0" ng-click="currentPage=currentPage-1">
+                    <
+                </button>
+                {{currentPage+1}}/{{numberOfPages()}}
+                <button ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1">
+                    >
+                </button> -->
+                    <md-button class="md-raised pull-left" ng-disabled="currentPage == 0"  ng-click="currentPage=currentPage-1"><span class="glyphicon glyphicon-chevron-left"></span></md-button>
+                    <md-button ng-disabled="true"> </md-button>
+                    <span style="margin:auto; font-size:16px">{{currentPage+1}}/{{numberOfPages()}}</span>
+                    <md-button class="md-raised pull-right" ng-disabled="currentPage >= data.length/pageSize - 1" ng-click="currentPage=currentPage+1"><span class="glyphicon glyphicon-chevron-right"></span></md-button>
+                    <md-button ng-disabled="true"> </md-button>
+              </div>
+            </div>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="./json_data.js"></script>
+  <script type="text/javascript" src="./mainController.js"></script>
+</html>
